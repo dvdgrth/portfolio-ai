@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# don't track private public files
+public/private
+
+# don't track weird files from copies to wsl
+*Zone.Identifier
