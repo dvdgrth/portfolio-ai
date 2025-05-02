@@ -10,5 +10,14 @@ services:
       - ./frontend:/app
       - /app/node_modules
     env_file:
-      - ./frontend/.env.local
+      - ./frontend/.env
     restart: unless-stopped
+    
+  backend:
+    build: ./backend
+    container_name: fastapi_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

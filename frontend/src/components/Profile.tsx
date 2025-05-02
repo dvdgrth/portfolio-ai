@@ -1,7 +1,9 @@
 import Image from "next/image";
 
 export default function Profile() {
-  const name = process.env.NEXT_PUBLIC_PROFILE_NAME || "[name]";
+  const first_name =
+    process.env.NEXT_PUBLIC_PROFILE_FIRST_NAME || "[first name]";
+  const last_name = process.env.NEXT_PUBLIC_PROFILE_LAST_NAME || "[last name]";
   const bio = process.env.NEXT_PUBLIC_PROFILE_BIO || "[bio]";
   const github = process.env.NEXT_PUBLIC_PROFILE_GITHUB || "#";
   const linkedin = process.env.NEXT_PUBLIC_PROFILE_LINKEDIN || "#";
@@ -20,7 +22,9 @@ export default function Profile() {
           height={128}
           className="rounded-full"
         />
-        <h2 className="text-xl font-bold">{name}</h2>
+        <h2 className="text-xl font-bold">
+          {first_name} {last_name}
+        </h2>
       </div>
       <p className="mt-2">{bio}</p>
 
