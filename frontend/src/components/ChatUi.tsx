@@ -2,6 +2,7 @@
 
 import { BaseSyntheticEvent, useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import CircleLoader from "react-spinners/CircleLoader";
 
 export default function ChatUI() {
   const first_name =
@@ -75,10 +76,12 @@ export default function ChatUI() {
           </div>
         ))}
         {isLoading && (
-          <div className="text-center text-gray-500">
-            Nachricht wird gesendet...
+          <div className="flex justify-left items-center text-gray-500">
+            <div className="mr-4">Antwort wird generiert...</div>
+            <CircleLoader color="#3498db" size={48} />
           </div>
         )}
+
         <div ref={messagesEndRef} />
       </div>
 
