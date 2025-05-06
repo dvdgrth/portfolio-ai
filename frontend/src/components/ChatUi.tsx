@@ -19,6 +19,8 @@ export default function ChatUI() {
   const [isLoading, setIsLoading] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -26,6 +28,12 @@ export default function ChatUI() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      inputRef.current?.focus(); // Refocus the textarea
+    }
+  }, [isLoading]);
 
   const handleSend = async (event: BaseSyntheticEvent) => {
     event.preventDefault();
@@ -45,15 +53,36 @@ export default function ChatUI() {
         body: JSON.stringify({ messages: [...messages, userMessage] }),
       });
 
-      const data = await res.json();
-
-      const assistantMessage = {
-        role: "assistant",
-        content: data.message.content,
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
+      if (res.status === 429) {
+        const rateLimitMessage = {
+          role: "assistant",
+          content:
+            "Rate-Limit überschritten. Bitte warte einen Moment, bevor du es erneut versuchst.",
+        };
+        setMessages((prev) => [...prev, rateLimitMessage]);
+      } else if (res.ok) {
+        const data = await res.json();
+        const assistantMessage = {
+          role: "assistant",
+          content: data.message.content,
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+      } else {
+        const errorMessage = {
+          role: "assistant",
+          content:
+            "Ein Fehler ist aufgetreten. Bitte versuche es später erneut.",
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+      }
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.error("Fehler beim Senden der Nachricht:", error);
+      const errorMessage = {
+        role: "assistant",
+        content:
+          "Ein Verbindungsfehler ist aufgetreten. Bitte überprüfe deine Internetverbindung und versuche es erneut.",
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -89,6 +118,7 @@ export default function ChatUI() {
       <form className="p-4 border-t border-gray-300 bg-gray-50">
         <div className="flex items-center gap-3 max-w-3xl mx-auto">
           <textarea
+            ref={inputRef}
             rows={1}
             placeholder="Schreibe eine Nachricht..."
             maxLength={500}
