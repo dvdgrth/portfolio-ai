@@ -12,7 +12,7 @@ export default function Home() {
 
         {/* ChatUI Section */}
         <div className="w-2/3 p-4 flex flex-col h-full">
-          <div className="flex-1 overflow-y-auto h-full">
+          <div className="flex-1 pt-4 overflow-y-auto h-full">
             <ChatUI />
           </div>
         </div>

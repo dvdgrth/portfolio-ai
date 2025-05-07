@@ -91,13 +91,13 @@ export default function ChatUI() {
   return (
     <div className="h-full flex flex-col rounded-lg">
       {/* Chat Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 shadow-inner">
+      <div className="flex-1 overflow-y-auto space-y-4">
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`px-4 py-2 rounded-lg shadow ${
+            className={`rounded-lg  ${
               msg.role === "user"
-                ? "bg-background-darker self-end ml-auto text-right"
+                ? "bg-background-darker self-end ml-auto text-right px-4 py-2"
                 : "self-start mr-auto text-left"
             } w-fit max-w-[85%] break-words`}
           >
@@ -107,7 +107,11 @@ export default function ChatUI() {
         {isLoading && (
           <div className="flex justify-left items-center text-gray-500">
             <div className="mr-4">Antwort wird generiert...</div>
-            <CircleLoader color="#3498db" size={48} />
+            <CircleLoader
+              color="#6a7282 "
+              size={36}
+              className="color-black fill-amber-50"
+            />
           </div>
         )}
 
@@ -115,14 +119,14 @@ export default function ChatUI() {
       </div>
 
       {/* Input Form */}
-      <form className="p-4 ">
+      <form>
         <div className="flex items-center gap-3 max-w-3xl mx-auto">
           <textarea
             ref={inputRef}
             rows={1}
             placeholder="Schreibe eine Nachricht..."
             maxLength={500}
-            className="flex-1 bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-background-darker resize-none"
+            className="flex-1 bg-gray-50 border rounded-lg px-4 py-2 resize-none"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
@@ -135,7 +139,7 @@ export default function ChatUI() {
           />
           <button
             type="submit"
-            className={`px-6 py-2 rounded-lg hover:text-black hover:bg-background-darker transition-all border border-gray-300 ${
+            className={`px-6 py-2 rounded-lg hover:text-black hover:bg-background-darker transition-all border ${
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             onClick={handleSend}

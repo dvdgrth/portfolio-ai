@@ -1,10 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Profile() {
   const first_name =
     process.env.NEXT_PUBLIC_PROFILE_FIRST_NAME || "[first name]";
-  const last_name = process.env.NEXT_PUBLIC_PROFILE_LAST_NAME || "[last name]";
-  const bio = process.env.NEXT_PUBLIC_PROFILE_BIO || "[bio]";
   const github = process.env.NEXT_PUBLIC_PROFILE_GITHUB || "#";
   const linkedin = process.env.NEXT_PUBLIC_PROFILE_LINKEDIN || "#";
 
@@ -20,16 +19,39 @@ export default function Profile() {
           alt="Profile"
           width={150}
           height={150}
-          className="rounded-full grayscale-80 contrast-150 brightness-110 shadow-2xl hover:shadow-3xl transition-shadow duration-300"
+          className="rounded-full grayscale-60 contrast-150 brightness-110 border border-gray-500 shadow-xl"
         />
-
       </div>
-      <div className="mt-2 text-center space-y-2">
-        <p>{first_name}.</p>
-        <p>Softwareentwickler.</p>
+      <div className="mt-6 text-center space-y-2">
+        <p>Persönliche Website von {first_name}.</p>
+
+        <p>Ein Software-Entwickler auf der Suche nach seinem Traumjob.</p>
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 text-center">
+        <nav className="flex flex-col items-center gap-2">
+          <Link
+            href="/about"
+            className="px-4 py-2 underline bg-background-darker"
+          >
+            Über mich
+          </Link>
+          <Link
+            href="/contact"
+            className="px-4 py-2 underline bg-background-darker"
+          >
+            Kontakt
+          </Link>
+          <Link
+            href="/impressum"
+            className="px-4 py-2 underline bg-background-darker"
+          >
+            Impressum
+          </Link>
+        </nav>
+      </div>
+
+      <div className="mt-6">
         <div className="flex gap-4 justify-center">
           <a
             href={github}
@@ -40,8 +62,8 @@ export default function Profile() {
             <Image
               src="/github-mark.svg"
               alt="GitHub"
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               className="inline"
             />
           </a>
@@ -54,8 +76,8 @@ export default function Profile() {
             <Image
               src="/InBug-Black.png"
               alt="LinkedIn"
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               className="inline"
             />
           </a>

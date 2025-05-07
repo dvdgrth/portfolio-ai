@@ -2,7 +2,7 @@
 
 :root {
   --background: rgb(252, 248, 235);
-  --background-darker: rgb(255, 246, 212);
+  --background-darker: #fff6d4;
   --foreground: #171717;
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 }
