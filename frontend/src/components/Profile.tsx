@@ -13,53 +13,53 @@ export default function Profile() {
 
   return (
     <div className="p-4">
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 justify-center">
         {/* Profile Image */}
         <Image
           src={profileImage}
           alt="Profile"
-          width={128}
-          height={128}
-          className="rounded-full"
+          width={150}
+          height={150}
+          className="rounded-full grayscale-80 contrast-150 brightness-110 shadow-2xl hover:shadow-3xl transition-shadow duration-300"
         />
-        <h2 className="text-xl font-bold">
-          {first_name} {last_name}
-        </h2>
+
       </div>
-      <p className="mt-2">{bio}</p>
+      <div className="mt-2 text-center space-y-2">
+        <p>{first_name}.</p>
+        <p>Softwareentwickler.</p>
+      </div>
 
       <div className="mt-4">
-        <h3 className="text-lg font-semibold">Meine Interessen</h3>
-        <ul className="list-disc list-inside">
-          <li>Web</li>
-          <li>KI</li>
-          <li>Programmieren</li>
-        </ul>
-      </div>
-      <div className="mt-4">
-        <h3 className="text-lg font-semibold">Meine Links</h3>
-        <ul className="list-disc list-inside">
-          <li>
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500"
-            >
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a
-              href={linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500"
-            >
-              LinkedIn
-            </a>
-          </li>
-        </ul>
+        <div className="flex gap-4 justify-center">
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 inline-flex items-center"
+          >
+            <Image
+              src="/github-mark.svg"
+              alt="GitHub"
+              width={50}
+              height={50}
+              className="inline"
+            />
+          </a>
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 inline-flex items-center"
+          >
+            <Image
+              src="/InBug-Black.png"
+              alt="LinkedIn"
+              width={50}
+              height={50}
+              className="inline"
+            />
+          </a>
+        </div>
       </div>
     </div>
   );
