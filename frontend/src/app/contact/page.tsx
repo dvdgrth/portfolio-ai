@@ -30,13 +30,14 @@ export default function Contact() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.detail || "Etwas ist schiefgelaufen");
+        throw new Error(data.detail[0]?.msg || "Etwas ist schiefgelaufen");
       }
 
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       setStatus("error");
+
       setErrorMessage(
         error instanceof Error ? error.message : "Etwas ist schiefgelaufen"
       );
