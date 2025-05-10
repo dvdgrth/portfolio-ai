@@ -1,5 +1,7 @@
 "use client";
 
+import BackToHome from "@/components/BackToHome";
+import ImpressumLink from "@/components/ImpressumLink";
 import { useState } from "react";
 
 export default function Contact() {
@@ -53,6 +55,7 @@ export default function Contact() {
 
   return (
     <div className="w-full">
+      <BackToHome />
       <div className="max-w-2xl w-full mx-auto p-6">
         <h1 className="text-3xl font-bold mb-6 text-center">Kontakt</h1>
 
@@ -123,6 +126,7 @@ export default function Contact() {
           </button>
         </form>
       </div>
+      <ImpressumLink />
     </div>
   );
 }
